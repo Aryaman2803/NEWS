@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".HeadlineFragment">
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/black_background"
+        android:columnCount="2"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:rowCount="2">
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#000000"
+            android:ems="10"
+            android:enabled="true"
+            android:focusable="true"
+            android:hint="Search"
+            android:inputType="textMultiLine"
+            android:isScrollContainer="true"
+            android:maxLines="2"
+            android:minLines="1"
+            android:padding="8dp"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:textIsSelectable="true" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#000000"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            android:paddingRight="20dp" />
+    </GridLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp" />
+</LinearLayout>
