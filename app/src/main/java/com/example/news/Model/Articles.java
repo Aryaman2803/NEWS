@@ -7,7 +7,7 @@ public class Articles {
 
     @SerializedName("source")
     @Expose
-    private String source;
+    private Source source;
 
     @SerializedName("author")
     @Expose
@@ -28,12 +28,26 @@ public class Articles {
     @SerializedName("urlToImage")
     @Expose
     private String urlToImage;
+    @SerializedName("publishedAt")
+    @Expose
+    private String publishedAt;
 
-    public String getSource() {
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
+
+    /**
+     * THis  will recieve source from Source.java class
+     **/
+    public Source getSource() {
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSource(Source source) {
         this.source = source;
     }
 
