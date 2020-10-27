@@ -1,20 +1,12 @@
 package com.example.news;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -59,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         /**(11) We can pass Fragment icons dynamically too**/
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_forum_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_business_24);
+
 
     }
 

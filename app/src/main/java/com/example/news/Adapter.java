@@ -68,7 +68,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return articles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -87,7 +87,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             tvSource = itemView.findViewById(R.id.tvSource);
             tvDate = itemView.findViewById(R.id.tvDate);
             imageView = itemView.findViewById(R.id.imageCardView);
-            cardView = itemView.findViewById(R.id.imageCardView);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 }

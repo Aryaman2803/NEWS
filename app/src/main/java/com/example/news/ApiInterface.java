@@ -12,12 +12,35 @@ public interface ApiInterface {
      **/
 
     @GET("top-headlines")
-    Call<Headline> getHeadliine(
+    Call<Headline> getHeadline(
             @Query("country") String country,
+            @Query("pageSize") int pageSize,
             @Query("apiKey") String apiKey
     );
+
+
+    /**
+     * FOR SEARCHING NEWS
+     **/
+    @GET("everything")
+    Call<Headline> getSpecificData(
+            @Query("q") String query,
+            @Query("pageSize") int pageSize,
+            @Query("apiKey") String apiKey
+    );
+
     /**
      * Here we are starting PATH AND QUERIES
      **/
+    /**
+     * Here we will display Business data in BusinessFragment
+     **/
 
+    @GET("top-headlines")
+    Call<Headline> getCategory(
+            @Query("country") String country,
+            @Query("pageSize") int pageSize,
+            @Query("category") String category,
+            @Query("apiKey") String apiKey
+    );
 }
