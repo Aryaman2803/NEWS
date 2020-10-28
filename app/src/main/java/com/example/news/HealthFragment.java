@@ -37,11 +37,11 @@ public class HealthFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_health, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerView);
-//        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         articles = new ArrayList<>();
+
 
         String country = getCountry();
         String category = "health";

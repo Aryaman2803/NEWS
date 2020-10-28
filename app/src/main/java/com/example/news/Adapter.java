@@ -1,6 +1,7 @@
 package com.example.news;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.tvSource.setText(a.getSource().getName());
 
         String imageUrl = a.getUrlToImage();
-        Picasso.get().load(imageUrl).into(holder.imageView);
+        // Picasso.get().load(imageUrl).into(holder.imageView);
+
+        if (TextUtils.isEmpty(imageUrl)) {
+            holder.imageView.setImageResource(R.drawable.ic_baseline_image_24);
+        } else {
+            Picasso.get().load(imageUrl).into(holder.imageView);
+        }
 
     }
 

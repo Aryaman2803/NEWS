@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private HeadlineFragment headlineFragment;
     private BusinessFragment businessFragment;
     private HealthFragment healthFragment;
+    private SportsFragment sportsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         headlineFragment = new HeadlineFragment();
         businessFragment = new BusinessFragment();
         healthFragment = new HealthFragment();
+        sportsFragment = new SportsFragment();
 
         /**(3) Now we will set up our tab layout with the view pager.
          * We also need an Adapter for our ViewPager **/
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(headlineFragment, "Headline");
         viewPagerAdapter.addFragment(businessFragment, "Business");
         viewPagerAdapter.addFragment(healthFragment, "health");
-
+        viewPagerAdapter.addFragment(sportsFragment, "Sports");
 
         /**(10) Our ViewPagerAdapter is ready, now we set the Adapter**/
         viewPager.setAdapter(viewPagerAdapter);
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_forum_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_business_24);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_healing_24);
-
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_baseline_sports_basketball_24);
 
     }
 
