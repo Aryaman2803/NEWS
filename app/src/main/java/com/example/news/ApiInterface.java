@@ -43,4 +43,5 @@ public interface ApiInterface {
             @Query("category") String category,
             @Query("apiKey") String apiKey
     );
+
 }

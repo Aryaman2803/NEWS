@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private HeadlineFragment headlineFragment;
     private BusinessFragment businessFragment;
+    private HealthFragment healthFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         /**(2) Fragments created now create fragment Objects**/
         headlineFragment = new HeadlineFragment();
         businessFragment = new BusinessFragment();
+        healthFragment = new HealthFragment();
 
         /**(3) Now we will set up our tab layout with the view pager.
          * We also need an Adapter for our ViewPager **/
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         /**(9) Now we pass object of our Business and Headline fragment**/
         viewPagerAdapter.addFragment(headlineFragment, "Headline");
         viewPagerAdapter.addFragment(businessFragment, "Business");
+        viewPagerAdapter.addFragment(healthFragment, "health");
 
 
         /**(10) Our ViewPagerAdapter is ready, now we set the Adapter**/
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         /**(11) We can pass Fragment icons dynamically too**/
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_forum_24);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_business_24);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_healing_24);
 
 
     }
