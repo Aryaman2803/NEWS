@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.news.Model.Articles;
 import com.example.news.Model.Headline;
@@ -26,6 +27,7 @@ public class SportsFragment extends Fragment {
     RecyclerView recyclerView;
     Adapter adapter;
     List<Articles> articles;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class SportsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sports, container, false);
 
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -46,15 +50,23 @@ public class SportsFragment extends Fragment {
         String country = getCountry();
         String category = "sports";
         int pageSize = 100;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                retrieveJson(country, pageSize, category, API_KEY);
+            }
+        });
         retrieveJson(country, pageSize, category, API_KEY);
         return view;
     }
 
     public void retrieveJson(String country, int pageSize, String category, String apiKey) {
+        swipeRefreshLayout.setRefreshing(true);
         Call<Headline> call = ApiClient.getInstance().getApi().getCategory(country, pageSize, category, apiKey);
         call.enqueue(new Callback<Headline>() {
             @Override
             public void onResponse(Call<Headline> call, Response<Headline> response) {
+                swipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccessful() && response.body().getArticles() != null) {
                     articles.clear();
                     articles = response.body().getArticles();
@@ -66,6 +78,7 @@ public class SportsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Headline> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getActivity(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

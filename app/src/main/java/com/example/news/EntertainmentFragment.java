@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.news.Model.Articles;
 import com.example.news.Model.Headline;
@@ -26,6 +27,7 @@ public class EntertainmentFragment extends Fragment {
     RecyclerView recyclerView;
     Adapter adapter;
     List<Articles> articles;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class EntertainmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entertainment, container, false);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -45,16 +48,24 @@ public class EntertainmentFragment extends Fragment {
         String country = getCountry();
         String category = "entertainment";
         int pageSize = 100;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                retrieveJson(country, pageSize, category, API_KEY);
+            }
+        });
         retrieveJson(country, pageSize, category, API_KEY);
         return view;
     }
 
     public void retrieveJson(String country, int pageSize, String category, String apiKey) {
+        swipeRefreshLayout.setRefreshing(true);
         Call<Headline> call = ApiClient.getInstance().getApi().getCategory(country, pageSize, category, apiKey);
         call.enqueue(new Callback<Headline>() {
             @Override
             public void onResponse(Call<Headline> call, Response<Headline> response) {
                 if (response.isSuccessful() && response.body().getArticles() != null) {
+                    swipeRefreshLayout.setRefreshing(false);
                     articles.clear();
                     articles = response.body().getArticles();
                     adapter = new Adapter(getContext(), articles);
@@ -65,6 +76,7 @@ public class EntertainmentFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Headline> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(true);
                 Toast.makeText(getActivity(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

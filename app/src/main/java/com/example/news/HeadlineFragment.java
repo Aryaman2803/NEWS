@@ -1,7 +1,6 @@
 package com.example.news;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.news.Model.Articles;
 import com.example.news.Model.Headline;
@@ -32,6 +32,7 @@ public class HeadlineFragment extends Fragment {
     List<Articles> articles;
     EditText editQuery;
     Button button;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class HeadlineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_headline, container, false);
         editQuery = view.findViewById(R.id.editText);
         button = view.findViewById(R.id.button);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
         /**(1) Get reference to the recylerView **/
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -59,14 +61,27 @@ public class HeadlineFragment extends Fragment {
 
         String country = getCountry();
         int pageSize = 100;
-        retrieveJson("", country, pageSize, API_KEY);
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                retrieveJson("", country, pageSize, API_KEY);
+            }
+        });
+        retrieveJson("", country, pageSize, API_KEY);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (!editQuery.getText().toString().equals("")) {
+                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            retrieveJson("", country, pageSize, API_KEY);
+                        }
+                    });
+
                     retrieveJson(editQuery.getText().toString(), country, pageSize, API_KEY);
                 } else {
                     retrieveJson("", country, pageSize, API_KEY);
@@ -79,6 +94,7 @@ public class HeadlineFragment extends Fragment {
 
 
     public void retrieveJson(String query, String country, int pageSize, String apiKey) {
+        swipeRefreshLayout.setRefreshing(true);
         Call<Headline> call;
         if (!editQuery.getText().toString().equals("")) {
             call = ApiClient.getInstance().getApi().getSpecificData(query, pageSize, apiKey);
@@ -89,7 +105,7 @@ public class HeadlineFragment extends Fragment {
             @Override
             public void onResponse(Call<Headline> call, Response<Headline> response) {
                 if (response.isSuccessful() && response.body().getArticles() != null) {
-                    Log.d("RESPONSEEE", response.body().toString());
+                    swipeRefreshLayout.setRefreshing(false);
                     articles.clear();
                     articles = response.body().getArticles();
                     adapter = new Adapter(getActivity(), articles);
@@ -98,10 +114,13 @@ public class HeadlineFragment extends Fragment {
                     //                   recyclerView.setAdapter(new Adapter(getContext(),articles));
                     adapter.notifyDataSetChanged();
                 }
+
             }
+
 
             @Override
             public void onFailure(Call<Headline> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getActivity(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
