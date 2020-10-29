@@ -8,8 +8,11 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="6dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="8dp"
         app:cardMaxElevation="10dp">
 
         <FrameLayout
@@ -52,14 +55,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="3dp">
 
                 <TextView
                     android:id="@+id/tvSource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="15"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:text="Source"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
@@ -68,7 +71,7 @@
                     android:id="@+id/tvDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="right"
                     android:text="Date"
                     android:textColor="#FFFFFF"

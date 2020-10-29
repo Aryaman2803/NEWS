@@ -15,7 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.news.Model.Articles;
 import com.squareup.picasso.Picasso;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * AFTER CREATING ApiClient->ApiInterface.
@@ -59,7 +65,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         /**(6) Now start binding the Articles on its position and set its position*/
         Articles a = articles.get(position);
         holder.tvTitle.setText(a.getTitle());
-        holder.tvDate.setText(a.getPublishedAt());
+        holder.tvDate.setText(dateTime(a.getPublishedAt()));
         holder.tvSource.setText(a.getSource().getName());
 
         String imageUrl = a.getUrlToImage();
@@ -96,5 +102,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             imageView = itemView.findViewById(R.id.imageCardView);
             cardView = itemView.findViewById(R.id.cardView);
         }
+    }
+
+    public String dateTime(String s) {
+        PrettyTime prettyTime = new PrettyTime(new Locale(getCountry()));
+        String time = null;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:", Locale.ENGLISH);
+            Date date = simpleDateFormat.parse(s);
+            time = prettyTime.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+
+    public String getCountry() {
+        Locale locale = Locale.getDefault();
+        String country = locale.getCountry();
+        return country.toLowerCase();
     }
 }

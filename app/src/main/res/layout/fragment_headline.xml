@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/overallBackground"
     android:orientation="vertical"
-
     tools:context=".HeadlineFragment">
+
 
 
     <GridLayout
@@ -29,8 +29,7 @@
             android:layout_columnWeight="1"
             android:backgroundTint="#000000"
             android:ems="10"
-            android:enabled="true"
-            android:focusable="true"
+            android:fontFamily="sans-serif-condensed-medium"
             android:hint="Search"
             android:inputType="textMultiLine"
             android:isScrollContainer="true"
@@ -39,7 +38,8 @@
             android:padding="8dp"
             android:textColor="@color/grey"
             android:textColorHint="@color/grey"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="true"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
@@ -56,5 +56,5 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="2dp" />
 </LinearLayout>

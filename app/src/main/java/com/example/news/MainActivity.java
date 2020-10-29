@@ -1,6 +1,7 @@
 package com.example.news;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
         viewPager = findViewById(R.id.view_pager);
-        toolbar = findViewById(R.id.toolbar);
         tabLayout = findViewById(R.id.tab_layout);
 
         /**(2) Fragments created now create fragment Objects**/

@@ -60,9 +60,12 @@ public class HeadlineFragment extends Fragment {
         String country = getCountry();
         int pageSize = 100;
         retrieveJson("", country, pageSize, API_KEY);
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (!editQuery.getText().toString().equals("")) {
                     retrieveJson(editQuery.getText().toString(), country, pageSize, API_KEY);
                 } else {

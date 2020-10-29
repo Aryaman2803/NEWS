@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
 
 
 
