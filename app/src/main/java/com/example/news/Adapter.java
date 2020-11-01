@@ -1,6 +1,7 @@
 package com.example.news;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,12 +72,31 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String imageUrl = a.getUrlToImage();
         // Picasso.get().load(imageUrl).into(holder.imageView);
 
+
         if (TextUtils.isEmpty(imageUrl)) {
             holder.imageView.setImageResource(R.drawable.ic_baseline_image_24);
         } else {
-            Picasso.get().load(imageUrl).into(holder.imageView);
+            Picasso.get().load(imageUrl).resize(1080, 720).onlyScaleDown().into(holder.imageView);
         }
-
+//
+//        if(TextUtils.isEmpty(imageUrl)){
+//            holder.imageView.setImageResource(R.drawable.ic_baseline_image_24);
+//        }else {
+//            Glide.with(context).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.imageView);
+//        }
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Detailed.class);
+                intent.putExtra("title", a.getTitle());
+                intent.putExtra("source", a.getSource().getName());
+                intent.putExtra("time", dateTime(a.getPublishedAt()));
+                intent.putExtra("imageUrl", a.getUrlToImage());
+                intent.putExtra("url", a.getUrl());
+                intent.putExtra("desc", a.getDescription());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

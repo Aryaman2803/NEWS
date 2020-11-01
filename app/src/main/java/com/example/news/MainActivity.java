@@ -1,7 +1,14 @@
 package com.example.news;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,10 +17,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+    public Toolbar toolbar;
     private ViewPager viewPager;
     TabLayout tabLayout;
-
+    EditText editText;
+    Button button;
     private HeadlineFragment headlineFragment;
     private BusinessFragment businessFragment;
     private HealthFragment healthFragment;
@@ -30,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
+        editText = findViewById(R.id.editText);
+        button = findViewById(R.id.button);
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
 
@@ -68,6 +78,21 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(4).setIcon(R.drawable.ic_tv);
         tabLayout.getTabAt(5).setIcon(R.drawable.ic_science);
 
+        String query = editText.getText().toString();
+        /**Integrating onClick Button features**/
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(editText.getText().toString())) {
+                    Toast.makeText(MainActivity.this, "Field Empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, Search.class);
+                    intent.putExtra("query", editText.getText().toString());
+                    Log.v("Edit Query ", query);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
 
