@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -26,12 +24,13 @@ import retrofit2.Response;
 
 
 public class HeadlineFragment extends Fragment {
-    final String API_KEY = "579d24af38bb4044b9203297313dc669";
+//    final  String API_KEY = String.valueOf(R.string.API_KEY);
+
+    //    final String API_KEY = "579d24af38bb4044b9203297313dc669";
+    final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
     RecyclerView recyclerView;
     Adapter adapter;
     List<Articles> articles;
-    EditText editQuery;
-    Button button;
     SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -48,8 +47,6 @@ public class HeadlineFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_headline, container, false);
-        editQuery = view.findViewById(R.id.editText);
-        button = view.findViewById(R.id.button);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
         /**(1) Get reference to the recylerView **/
@@ -65,42 +62,20 @@ public class HeadlineFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                retrieveJson("", country, pageSize, API_KEY);
+                retrieveJson(country, pageSize, API_KEY);
             }
         });
-        retrieveJson("", country, pageSize, API_KEY);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (!editQuery.getText().toString().equals("")) {
-                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override
-                        public void onRefresh() {
-                            retrieveJson("", country, pageSize, API_KEY);
-                        }
-                    });
-
-                    retrieveJson(editQuery.getText().toString(), country, pageSize, API_KEY);
-                } else {
-                    retrieveJson("", country, pageSize, API_KEY);
-                }
-            }
-        });
+        retrieveJson(country, pageSize, API_KEY);
 
         return view;
     }
 
 
-    public void retrieveJson(String query, String country, int pageSize, String apiKey) {
+    public void retrieveJson(String country, int pageSize, String apiKey) {
         swipeRefreshLayout.setRefreshing(true);
         Call<Headline> call;
-        if (!editQuery.getText().toString().equals("")) {
-            call = ApiClient.getInstance().getApi().getSpecificData(query, pageSize, apiKey);
-        } else {
-            call = ApiClient.getInstance().getApi().getHeadline(country, pageSize, apiKey);
-        }
+        call = ApiClient.getInstance().getApi().getHeadline(country, pageSize, apiKey);
+
         call.enqueue(new Callback<Headline>() {
             @Override
             public void onResponse(Call<Headline> call, Response<Headline> response) {
