@@ -23,7 +23,7 @@ public class Search extends AppCompatActivity {
 //    final String API_KEY = "579d24af38bb4044b9203297313dc669";
 final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
     RecyclerView recyclerView;
-    Adapter adapter;
+    SearchAdapter adapter;
     List<Articles> articles;
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -66,7 +66,7 @@ final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
                     swipeRefreshLayout.setRefreshing(false);
                     articles.clear();
                     articles = response.body().getArticles();
-                    adapter = new Adapter(getApplicationContext(), articles);
+                    adapter = new SearchAdapter(getApplicationContext(), articles);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
