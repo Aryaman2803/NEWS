@@ -56,6 +56,11 @@ public class HeadlineFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         articles = new ArrayList<>();
 
+        adapter = new Adapter(getActivity(), articles);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+
         String country = getCountry();
         int pageSize = 100;
 
@@ -84,10 +89,9 @@ public class HeadlineFragment extends Fragment {
                     articles.clear();
                     articles = response.body().getArticles();
                     adapter = new Adapter(getActivity(), articles);
-                    //        recyclerView.setAdapter(new Adapter(getActivity(), articles));
                     recyclerView.setAdapter(adapter);
-                    //                   recyclerView.setAdapter(new Adapter(getContext(),articles));
                     adapter.notifyDataSetChanged();
+
                 }
 
             }

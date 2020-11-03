@@ -42,11 +42,17 @@ public class EntertainmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entertainment, container, false);
+        articles = new ArrayList<>();
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        articles = new ArrayList<>();
+        recyclerView.setHasFixedSize(true);
+
+
+        adapter = new Adapter(getActivity(), articles);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
 
         String country = getCountry();
         String category = "entertainment";

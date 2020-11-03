@@ -46,9 +46,14 @@ public class SportsFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         articles = new ArrayList<>();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+
+        adapter = new Adapter(getActivity(), articles);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
 
         String country = getCountry();
         String category = "sports";

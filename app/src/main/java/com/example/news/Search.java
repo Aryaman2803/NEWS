@@ -40,7 +40,6 @@ final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         articles = new ArrayList<>();
-
         int pageSize = 100;
 
 

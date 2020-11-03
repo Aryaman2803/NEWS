@@ -6,16 +6,20 @@
     android:orientation="horizontal"
     android:weightSum="2">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardMaxElevation="10dp">
+        android:fadingEdgeLength="1dp"
+        android:paddingRight="2dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#e5e5e5"
+        app:strokeWidth="1dp">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="90dp">
 
 
             <LinearLayout
@@ -27,18 +31,19 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
                     android:orientation="vertical">
 
 
                     <ImageView
                         android:id="@+id/imageCardView2"
-                        android:layout_width="70dp"
+                        android:layout_width="80dp"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_image_24" />
 
                     <ImageView
-                        android:layout_width="70dp"
+                        android:layout_width="80dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/gradient" />
                 </LinearLayout>
@@ -48,33 +53,51 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvIdCardView2"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginRight="20dp"
+                        android:orientation="vertical">
 
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:text="Title"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/tvIdCardView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginRight="20dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Title"
+                            android:textColor="#000000"
+                            android:textSize="17sp" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvDate2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="12dp"
-                        android:text="Date"
-                        android:textColor="#000000"
-                        android:ems="6" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvDate2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="8dp"
+                            android:ems="8"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Date"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
-
             </LinearLayout>
 
         </FrameLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

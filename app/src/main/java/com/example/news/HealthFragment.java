@@ -23,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HealthFragment extends Fragment {
+
 //    final  String API_KEY = String.valueOf(R.string.API_KEY);
 
     //    final String API_KEY = "579d24af38bb4044b9203297313dc669";
@@ -44,10 +45,16 @@ public class HealthFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_health, container, false);
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         articles = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+
+
+        adapter = new Adapter(getActivity(), articles);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
 
         String country = getCountry();
@@ -63,6 +70,7 @@ public class HealthFragment extends Fragment {
         retrieveJson(country, pageSize, category, API_KEY);
         return view;
     }
+
 
     public void retrieveJson(String country, int pageSize, String category, String apiKey) {
         swipeRefreshLayout.setRefreshing(true);
@@ -93,4 +101,5 @@ public class HealthFragment extends Fragment {
         String country = locale.getCountry();
         return country.toLowerCase();
     }
+
 }

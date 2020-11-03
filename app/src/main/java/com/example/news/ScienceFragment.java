@@ -44,10 +44,15 @@ public class ScienceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_science, container, false);
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         articles = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+
+        adapter = new Adapter(getActivity(), articles);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
 
         String country = getCountry();
         String category = "science";
