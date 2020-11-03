@@ -64,6 +64,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                 intent.putExtra("title", a.getTitle());
                 intent.putExtra("time", a.getSource().getName());
                 intent.putExtra("url", a.getUrl());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 context.startActivity(intent);
 
             }

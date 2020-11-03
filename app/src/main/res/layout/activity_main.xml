@@ -5,25 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".MainActivity">
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/overallBackground"
         android:fontFamily="@font/roboto_medium"
-        android:padding="10dp"
         android:gravity="center"
+        android:padding="10dp"
         android:text="NEWS"
         android:textColor="#191819"
         android:textSize="20sp" />
+
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
         android:background="@drawable/black_background"
         android:columnCount="2"
+        android:focusableInTouchMode="true"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:rowCount="2">
@@ -33,22 +39,19 @@
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
             android:backgroundTint="#000000"
-            android:ems="10"
+            android:ems="16"
             android:fontFamily="@font/roboto_medium"
             android:hint="Search"
-            android:inputType="textMultiLine"
+            android:imeOptions="actionSearch"
             android:isScrollContainer="true"
-            android:maxLines="2"
-            android:minLines="1"
-            android:padding="8dp"
+            android:inputType="text"
             android:textColor="@color/grey"
             android:textColorHint="@color/grey"
             android:textIsSelectable="true"
+
             android:textStyle="bold" />
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
@@ -69,9 +72,9 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            android:background="@color/overallBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/overallBackground"
             app:tabMode="scrollable"></com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

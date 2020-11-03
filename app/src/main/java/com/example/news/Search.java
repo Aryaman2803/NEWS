@@ -20,8 +20,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Search extends AppCompatActivity {
-//    final String API_KEY = "579d24af38bb4044b9203297313dc669";
-final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
+    final String API_KEY = "579d24af38bb4044b9203297313dc669";
+    //final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
     RecyclerView recyclerView;
     SearchAdapter adapter;
     List<Articles> articles;
@@ -79,4 +79,5 @@ final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
         });
 
     }
+
 }
