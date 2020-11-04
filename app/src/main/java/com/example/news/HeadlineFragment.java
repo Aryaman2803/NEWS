@@ -26,8 +26,9 @@ import retrofit2.Response;
 public class HeadlineFragment extends Fragment {
 //    final  String API_KEY = String.valueOf(R.string.API_KEY);
 
-    final String API_KEY = "579d24af38bb4044b9203297313dc669";
+    //    final String API_KEY = "579d24af38bb4044b9203297313dc669";
     //    final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
+    final String API_KEY = "7f675e79400c4ed68f8a87c2c0a013c2";
     RecyclerView recyclerView;
     Adapter adapter;
     List<Articles> articles;

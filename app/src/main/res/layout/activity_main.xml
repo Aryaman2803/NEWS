@@ -33,7 +33,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/darker_gray"
+            android:backgroundTint="#CCAAAAAA"
+            android:textCursorDrawable="@drawable/color_cursor"
 
             android:text="Search" />
 
