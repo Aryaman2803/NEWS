@@ -20,55 +20,45 @@
         android:textColor="#191819"
         android:textSize="20sp" />
 
-
-    <GridLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/black_background"
-        android:columnCount="2"
         android:focusableInTouchMode="true"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:rowCount="2">
-
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
-            android:ems="16"
-            android:fontFamily="@font/roboto_medium"
-            android:hint="Search"
-            android:imeOptions="actionSearch"
-            android:isScrollContainer="true"
-            android:inputType="text"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/grey"
-            android:textIsSelectable="true"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/darker_gray"
 
-            android:textStyle="bold" />
+            android:text="Search" />
+
+        <ImageButton
+            android:id="@+id/cross"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="13dp"
+            android:src="@drawable/ic_delete" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
-            android:layout_width="10dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:backgroundTint="#000000"
-            android:drawableRight="@drawable/ic_baseline_search_24"
-            android:paddingRight="20dp" />
-    </GridLayout>
-
+            android:background="#FFFFFF"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:stateListAnimator="@null" />
+    </LinearLayout>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"

@@ -4,15 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     EditText editText;
     Button button;
+    ImageButton imageButton;
     private ViewPager viewPager;
     private HeadlineFragment headlineFragment;
     private BusinessFragment businessFragment;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.editText);
         button = findViewById(R.id.button);
+        imageButton = findViewById(R.id.cross);
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
 
@@ -87,6 +91,33 @@ public class MainActivity extends AppCompatActivity {
         String query = editText.getText().toString();
 
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText(null);
+            }
+        });
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                imageButton.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                imageButton.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editText.getText().toString().isEmpty()) {
+                    imageButton.setVisibility(View.GONE);
+                }
+            }
+        });
+
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -95,11 +126,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        || actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_GO
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null) && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) || actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_GO) {
+
+                if ((event != null) && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+
                     button.performClick();
                 }
                 return false;
