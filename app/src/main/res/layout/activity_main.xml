@@ -23,27 +23,44 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="horizontal">
+        android:background="@drawable/black_background"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:backgroundTint="#CCAAAAAA"
+            android:backgroundTint="#000000"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="Search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:isScrollContainer="true"
+            android:text="Search"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
             android:textCursorDrawable="@drawable/color_cursor"
 
-            android:text="Search" />
+            android:textIsSelectable="true"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/cross"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="?selectableItemBackgroundBorderless"
-            android:padding="13dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="13dp"
+            android:paddingBottom="3dp"
             android:src="@drawable/ic_delete" />
 
 
@@ -52,7 +69,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="#000000"
             android:drawableLeft="@drawable/ic_baseline_search_24"
             android:stateListAnimator="@null" />
     </LinearLayout>

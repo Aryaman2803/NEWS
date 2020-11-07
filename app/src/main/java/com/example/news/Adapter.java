@@ -2,7 +2,7 @@ package com.example.news;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,18 +66,29 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         /**(6) Now start binding the Articles on its position and set its position*/
         Articles a = articles.get(position);
         holder.tvTitle.setText(a.getTitle());
-        holder.tvDate.setText(dateTime(a.getPublishedAt()));
+        holder.tvDate.setText("\u2022" + dateTime(a.getPublishedAt()));
         holder.tvSource.setText(a.getSource().getName());
 
         String imageUrl = a.getUrlToImage();
         // Picasso.get().load(imageUrl).into(holder.imageView);
+        Picasso.Builder builder = new Picasso.Builder(context);
+
+        builder.listener(new Picasso.Listener() {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                holder.cardView.setVisibility(View.GONE);
+            }
+        });
+        Picasso.get().load(imageUrl).resize(1080, 720).onlyScaleDown().into(holder.imageView);
+//
+//        if (TextUtils.isEmpty(imageUrl)) {
+//
+//            holder.imageView.setImageResource(R.drawable.ic_baseline_image_24);
+//        } else {
+//            Picasso.get().load(imageUrl).resize(1080, 720).onlyScaleDown().into(holder.imageView);
+//        }
 
 
-        if (TextUtils.isEmpty(imageUrl)) {
-            holder.imageView.setImageResource(R.drawable.ic_baseline_image_24);
-        } else {
-            Picasso.get().load(imageUrl).resize(1080, 720).onlyScaleDown().into(holder.imageView);
-        }
 //
 //        if(TextUtils.isEmpty(imageUrl)){
 //            holder.imageView.setImageResource(R.drawable.ic_baseline_image_24);
@@ -88,12 +99,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Detailed.class);
-                intent.putExtra("title", a.getTitle());
-                intent.putExtra("source", a.getSource().getName());
-                intent.putExtra("time", dateTime(a.getPublishedAt()));
-                intent.putExtra("imageUrl", a.getUrlToImage());
                 intent.putExtra("url", a.getUrl());
-                intent.putExtra("desc", a.getDescription());
                 context.startActivity(intent);
             }
         });
@@ -124,13 +130,34 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
-    public String dateTime(String s) {
-        PrettyTime prettyTime = new PrettyTime(new Locale(getCountry()));
+    /**__(1)__
+     * Updated Dependencies then commented below**/
+//
+//    public String dateTime(String t) {
+//        PrettyTime prettyTime = new PrettyTime(new Locale(getCountry()));
+//        String time = null;
+//        try {
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
+//            Date date = simpleDateFormat.parse(t);
+//            time = prettyTime.format(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return time;
+//    }
+
+    /**
+     * __(2)__
+     * Using SimpleDateFormat
+     **/
+
+    public String dateTime(String t) {
         String time = null;
+        PrettyTime p = new PrettyTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.forLanguageTag("es"));
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:", Locale.ENGLISH);
-            Date date = simpleDateFormat.parse(s);
-            time = prettyTime.format(date);
+            Date date = simpleDateFormat.parse(t);
+            time = p.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -142,4 +169,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String country = locale.getCountry();
         return country.toLowerCase();
     }
+
 }

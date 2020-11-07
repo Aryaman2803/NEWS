@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NEWS</string>
+    <string name="app_name">Hourly</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="API_KEY">7f675e79400c4ed68f8a87c2c0a013c2</string>

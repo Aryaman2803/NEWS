@@ -27,19 +27,8 @@ public class Detailed extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        String source = intent.getStringExtra("source");
-        String time = intent.getStringExtra("time");
-        String desc = intent.getStringExtra("desc");
-        String imageUrl = intent.getStringExtra("imageUrl");
         String url = intent.getStringExtra("url");
 
-
-//        if (TextUtils.isEmpty(imageUrl)) {
-//            imageView.setImageResource(R.drawable.ic_baseline_image_24);
-//        } else {
-//            Picasso.get().load(imageUrl).resize(1080,720).onlyScaleDown().into(imageView);
-//        }
 
 
         webView.setWebViewClient(new WebViewClient());

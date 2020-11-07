@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,21 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.news.Model.Articles;
-import com.example.news.Model.Headline;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ScienceFragment extends Fragment {
-    //    final  String API_KEY = String.valueOf(R.string.API_KEY);
-    final String API_KEY = "7f675e79400c4ed68f8a87c2c0a013c2";
-    //    final String API_KEY = "579d24af38bb4044b9203297313dc669";
-    //    final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
     RecyclerView recyclerView;
     Adapter adapter;
     List<Articles> articles;
@@ -35,66 +24,35 @@ public class ScienceFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_science, container, false);
-
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_business, container, false);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
-        articles = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        articles = new ArrayList<>();
 
+        Utility utility = new Utility(getActivity(), recyclerView, swipeRefreshLayout);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new Adapter(getActivity(), articles);
         recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
         adapter.notifyDataSetChanged();
-
-
-        String country = getCountry();
-        String category = "science";
-        int pageSize = 100;
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                retrieveJson(country, pageSize, category, API_KEY);
+                utility.retrieveJson("science");
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
         });
-        retrieveJson(country, pageSize, category, API_KEY);
+        utility.retrieveJson("science");
+
         return view;
-    }
-
-    public void retrieveJson(String country, int pageSize, String category, String apiKey) {
-        swipeRefreshLayout.setRefreshing(true);
-        Call<Headline> call = ApiClient.getInstance().getApi().getCategory(country, pageSize, category, apiKey);
-        call.enqueue(new Callback<Headline>() {
-            @Override
-            public void onResponse(Call<Headline> call, Response<Headline> response) {
-                if (response.isSuccessful() && response.body().getArticles() != null) {
-                    swipeRefreshLayout.setRefreshing(false);
-                    articles.clear();
-                    articles = response.body().getArticles();
-                    adapter = new Adapter(getContext(), articles);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Headline> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(getActivity(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public String getCountry() {
-        Locale locale = Locale.getDefault();
-        String country = locale.getCountry();
-        return country.toLowerCase();
     }
 }

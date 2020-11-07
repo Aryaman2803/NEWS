@@ -13,71 +13,63 @@
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:padding="4dp">
-
-            <ProgressBar
-                android:id="@+id/loader"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center" />
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imageCardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="160dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_baseline_image_24" />
 
             <ImageView
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="160dp"
                 android:background="@drawable/gradient" />
 
             <TextView
                 android:id="@+id/tvIdCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto_condensed_bold"
                 android:padding="8dp"
                 android:text="TTILE"
                 android:textColor="#FFFFFF"
                 android:textFontWeight="600"
                 android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvSource"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                android:layout_below="@id/imageCardView"
+                android:layout_alignParentLeft="true"
+                android:ems="12"
+                android:fontFamily="@font/roboto"
+                android:padding="5dp"
+                android:text="Source"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tvSource"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="15"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Source"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:gravity="right"
-                    android:text="Date"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </FrameLayout>
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageCardView"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tvSource"
+                android:fontFamily="@font/roboto"
+                android:gravity="right"
+                android:padding="5dp"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
 
+        </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

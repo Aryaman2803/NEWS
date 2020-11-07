@@ -3,26 +3,30 @@
     package="com.example.news">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/hourly"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/hourly"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Detailed" />
-        <activity android:name=".SplashScreen"></activity>
-        <activity android:name=".Search"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation|screenSize">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Search"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize">
+
         </activity>
 
         <meta-data
