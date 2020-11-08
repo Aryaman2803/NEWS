@@ -19,14 +19,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Utility {
-    final String API_KEY = "23b4de3f90fb4b22b319976dc410829d";
+    final String API_KEY = "579d24af38bb4044b9203297313dc669";
     SwipeRefreshLayout swipeRefreshLayout;
     List<Articles> articles;
     Adapter adapter;
     Context context;
-    //    final  String API_KEY = String.valueOf(R.string.API_KEY);
-    //    final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
-    //    final String API_KEY = "7f675e79400c4ed68f8a87c2c0a013c2";
     RecyclerView recyclerView;
     int pageSize = 100;
     String country = getCountry();
@@ -61,7 +58,7 @@ public class Utility {
                 @Override
                 public void onFailure(Call<Headline> call, Throwable t) {
                     swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(context, "Server Down", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Server Down", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {

@@ -1,6 +1,9 @@
 package com.example.news;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -20,10 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Search extends AppCompatActivity {
-    //    final  String API_KEY = String.valueOf(R.string.API_KEY);
-//    final String API_KEY = "7f675e79400c4ed68f8a87c2c0a013c2";
-    final String API_KEY = "23b4de3f90fb4b22b319976dc410829d";
-    //final String API_KEY = "0eb52f4866d045a48400fa5c03e5f840";
+    final String API_KEY = "579d24af38bb4044b9203297313dc669";
     RecyclerView recyclerView;
     SearchAdapter adapter;
     List<Articles> articles;
@@ -57,28 +57,37 @@ public class Search extends AppCompatActivity {
     }
 
     public void retrieveJson(String query, int pageSize, String apiKey) {
-        swipeRefreshLayout.setRefreshing(true);
-        Call<Headline> call;
-        call = ApiClient.getInstance().getApi().getSpecificData(query, pageSize, apiKey);
-        call.enqueue(new Callback<Headline>() {
-            @Override
-            public void onResponse(Call<Headline> call, Response<Headline> response) {
-                if (response.isSuccessful() && response.body().getArticles() != null) {
-                    swipeRefreshLayout.setRefreshing(false);
-                    articles.clear();
-                    articles = response.body().getArticles();
-                    adapter = new SearchAdapter(getApplicationContext(), articles);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
-            }
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-            @Override
-            public void onFailure(Call<Headline> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(Search.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (networkInfo != null && networkInfo.isConnected()) {
+            Call<Headline> call;
+            call = ApiClient.getInstance().getApi().getSpecificData(query, pageSize, apiKey);
+            call.enqueue(new Callback<Headline>() {
+                @Override
+                public void onResponse(Call<Headline> call, Response<Headline> response) {
+                    if (response.isSuccessful() && response.body().getArticles() != null) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        articles.clear();
+                        articles = response.body().getArticles();
+                        adapter = new SearchAdapter(getApplicationContext(), articles);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Headline> call, Throwable t) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Toast.makeText(Search.this, "Server Down", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getBaseContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+        }
+
 
     }
 }
