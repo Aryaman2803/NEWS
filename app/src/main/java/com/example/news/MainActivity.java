@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
 
+
         /**(2) Fragments created now create fragment Objects**/
         headlineFragment = new HeadlineFragment();
         businessFragment = new BusinessFragment();
@@ -89,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(5).setIcon(R.drawable.ic_science);
 
         String query = editText.getText().toString();
-
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,6 +23,7 @@ public class HeadlineFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     HeadlineFragment context;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

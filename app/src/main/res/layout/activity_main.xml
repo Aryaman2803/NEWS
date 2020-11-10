@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".MainActivity">
-
 
     <TextView
         android:layout_width="match_parent"
@@ -83,14 +81,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/overallBackground"
-            app:tabMode="scrollable"></com.google.android.material.tabs.TabLayout>
+            app:tabMode="scrollable" />
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
 
 </LinearLayout>

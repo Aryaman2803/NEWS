@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Utility {
-    final String API_KEY = "579d24af38bb4044b9203297313dc669";
+    final String API_KEY = "YOUR NEWS API KEY";
     SwipeRefreshLayout swipeRefreshLayout;
     List<Articles> articles;
     Adapter adapter;

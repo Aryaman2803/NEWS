@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Detailed extends AppCompatActivity {
 
     WebView webView;
+
     ProgressBar progressBar;
 
     @Override

@@ -78,18 +78,32 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return articles.size();
     }
 
-    public String dateTime(String s) {
-        PrettyTime prettyTime = new PrettyTime(new Locale(getCountry()));
+    public String dateTime(String t) {
         String time = null;
+        PrettyTime p = new PrettyTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.forLanguageTag("es"));
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:", Locale.ENGLISH);
-            Date date = simpleDateFormat.parse(s);
-            time = prettyTime.format(date);
+            Date date = simpleDateFormat.parse(t);
+            time = p.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return time;
     }
+
+
+//    public String dateTime(String s) {
+//        PrettyTime prettyTime = new PrettyTime(new Locale(getCountry()));
+//        String time = null;
+//        try {
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:", Locale.ENGLISH);
+//            Date date = simpleDateFormat.parse(s);
+//            time = prettyTime.format(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return time;
+//    }
 
     public String getCountry() {
         Locale locale = Locale.getDefault();

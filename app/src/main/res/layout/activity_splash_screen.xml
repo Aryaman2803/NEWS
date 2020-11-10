@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="NEWS APP"
+        android:text="HOURLY"
         android:textColor="#ffffff"
         android:textFontWeight="800"
         android:textSize="40sp" />
